@@ -71,6 +71,7 @@ void main() {
         mock.launch(
           'http://example.com/foobar',
           useSafariVC: false,
+          useCustomTabs: false,
           useWebView: false,
           universalLinksOnly: false,
           enableJavaScript: false,
@@ -103,6 +104,7 @@ void main() {
         mock.launch(
           'http://example.com/foobar',
           useSafariVC: true,
+          useCustomTabs: false,
           useWebView: true,
           universalLinksOnly: false,
           enableJavaScript: false,

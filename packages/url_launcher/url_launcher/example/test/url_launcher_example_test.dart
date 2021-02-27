@@ -25,6 +25,7 @@ void main() {
     };
     verifyNever(mock.launch(defaultUrl,
         useSafariVC: false,
+        useCustomTabs: false,
         useWebView: false,
         enableDomStorage: false,
         enableJavaScript: false,
@@ -38,6 +39,7 @@ void main() {
 
     verify(mock.launch(defaultUrl,
             useSafariVC: false,
+            useCustomTabs: false,
             useWebView: false,
             enableDomStorage: false,
             enableJavaScript: false,

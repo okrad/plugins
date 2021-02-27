@@ -49,6 +49,7 @@ void main() {
         verify(mock.launch(
           captureAny,
           useSafariVC: captureAnyNamed('useSafariVC'),
+          useCustomTabs: captureAnyNamed('useCustomTabs'),
           useWebView: captureAnyNamed('useWebView'),
           enableJavaScript: captureAnyNamed('enableJavaScript'),
           enableDomStorage: captureAnyNamed('enableDomStorage'),
@@ -58,6 +59,7 @@ void main() {
         <dynamic>[
           'http://flutter.dev/',
           true,
+          false,
           false,
           false,
           false,
@@ -76,6 +78,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: anyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -92,6 +95,24 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: captureAnyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
+          useWebView: anyNamed('useWebView'),
+          enableJavaScript: anyNamed('enableJavaScript'),
+          enableDomStorage: anyNamed('enableDomStorage'),
+          universalLinksOnly: anyNamed('universalLinksOnly'),
+          headers: anyNamed('headers'),
+        )).captured.single,
+        true,
+      );
+    });
+
+    test('force Custom Tabs', () async {
+      await launch('http://flutter.dev/', forceCustomTabs: true);
+      expect(
+        verify(mock.launch(
+          any,
+          useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: captureAnyNamed('useCustomTabs'),
           useWebView: anyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -109,6 +130,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: captureAnyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: anyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -125,6 +147,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: captureAnyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -142,6 +165,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: captureAnyNamed('useWebView'),
           enableJavaScript: captureAnyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -159,6 +183,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: captureAnyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: captureAnyNamed('enableDomStorage'),
@@ -176,6 +201,7 @@ void main() {
         verify(mock.launch(
           any,
           useSafariVC: captureAnyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: anyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
@@ -197,6 +223,7 @@ void main() {
         verify(await mock.launch(
           any,
           useSafariVC: anyNamed('useSafariVC'),
+          useCustomTabs: anyNamed('useCustomTabs'),
           useWebView: anyNamed('useWebView'),
           enableJavaScript: anyNamed('enableJavaScript'),
           enableDomStorage: anyNamed('enableDomStorage'),
