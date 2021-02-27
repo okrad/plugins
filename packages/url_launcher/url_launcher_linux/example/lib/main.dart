@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await UrlLauncherPlatform.instance.launch(
         url,
         useSafariVC: false,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
