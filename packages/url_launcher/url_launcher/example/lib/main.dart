@@ -51,6 +51,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _launchInCustomTabs(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceCustomTabs: true,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   Future<void> _launchInWebViewOrVC(String url) async {
     if (await canLaunch(url)) {
       await launch(
@@ -158,6 +171,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('Launch in browser'),
               ),
               const Padding(padding: EdgeInsets.all(16.0)),
+              ElevatedButton(
+                onPressed: () => setState(() {
+                  _launched = _launchInCustomTabs(toLaunch);
+                }),
+                child: const Text('Launch in Custom Tab'),
+              ),
               ElevatedButton(
                 onPressed: () => setState(() {
                   _launched = _launchInWebViewOrVC(toLaunch);
