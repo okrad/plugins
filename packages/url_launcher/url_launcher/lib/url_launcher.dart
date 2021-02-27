@@ -35,9 +35,12 @@ import 'package:url_launcher_platform_interface/url_launcher_platform_interface.
 /// the content if the url is a universal link and the respective app for the universal
 /// link is installed on the user's device; otherwise throw a [PlatformException].
 ///
+/// [forceCustomTabs] is only used in Android. If true the URL is launched in a Custom Tabs instance.
+/// This property has the precedence over [forceWebView]: if both are true, Custom Tabs will be used.
+///
 /// [forceWebView] is an Android only setting. If null or false, the URL is
-/// always launched with the default browser on device. If set to true, the URL
-/// is launched in a WebView. Unlike iOS, browser context is shared across
+/// launched with the default browser on device unless [forceCustomTabs] is true.
+/// If set to true, the URL is launched in a WebView. Unlike iOS, browser context is shared across
 /// WebViews.
 /// [enableJavaScript] is an Android only setting. If true, WebView enable
 /// javascript.
@@ -63,6 +66,7 @@ import 'package:url_launcher_platform_interface/url_launcher_platform_interface.
 Future<bool> launch(
   String urlString, {
   bool? forceSafariVC,
+  bool forceCustomTabs = false,
   bool forceWebView = false,
   bool enableJavaScript = false,
   bool enableDomStorage = false,
@@ -73,7 +77,10 @@ Future<bool> launch(
 }) async {
   final Uri url = Uri.parse(urlString.trimLeft());
   final bool isWebURL = url.scheme == 'http' || url.scheme == 'https';
-  if ((forceSafariVC == true || forceWebView == true) && !isWebURL) {
+  if ((forceSafariVC == true ||
+          forceWebView == true ||
+          forceCustomTabs == true) &&
+      !isWebURL) {
     throw PlatformException(
         code: 'NOT_A_WEB_SCHEME',
         message: 'To use webview or safariVC, you need to pass'
@@ -96,6 +103,7 @@ Future<bool> launch(
   final bool result = await UrlLauncherPlatform.instance.launch(
     urlString,
     useSafariVC: forceSafariVC ?? isWebURL,
+    useCustomTabs: forceCustomTabs,
     useWebView: forceWebView,
     enableJavaScript: enableJavaScript,
     enableDomStorage: enableDomStorage,
