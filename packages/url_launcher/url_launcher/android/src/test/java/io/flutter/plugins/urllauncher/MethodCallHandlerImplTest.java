@@ -113,19 +113,26 @@ public class MethodCallHandlerImplTest {
     Result result = mock(Result.class);
     // Setup expected values
     String url = "foo";
+    boolean useCustomTabs = false;
     boolean useWebView = false;
     boolean enableJavaScript = false;
     boolean enableDomStorage = false;
     // Setup arguments map send on the method channel
     Map<String, Object> args = new HashMap<>();
     args.put("url", url);
+    args.put("useCustomTabs", useCustomTabs);
     args.put("useWebView", useWebView);
     args.put("enableJavaScript", enableJavaScript);
     args.put("enableDomStorage", enableDomStorage);
     args.put("headers", new HashMap<>());
     // Mock the launch method on the urlLauncher class
     when(urlLauncher.launch(
-            eq(url), any(Bundle.class), eq(useWebView), eq(enableJavaScript), eq(enableDomStorage)))
+            eq(url),
+            any(Bundle.class),
+            eq(useCustomTabs),
+            eq(useWebView),
+            eq(enableJavaScript),
+            eq(enableDomStorage)))
         .thenReturn(UrlLauncher.LaunchStatus.NO_ACTIVITY);
     // Act by calling the "launch" method on the method channel
     methodCallHandler = new MethodCallHandlerImpl(urlLauncher);
@@ -142,19 +149,26 @@ public class MethodCallHandlerImplTest {
     Result result = mock(Result.class);
     // Setup expected values
     String url = "foo";
+    boolean useCustomTabs = false;
     boolean useWebView = false;
     boolean enableJavaScript = false;
     boolean enableDomStorage = false;
     // Setup arguments map send on the method channel
     Map<String, Object> args = new HashMap<>();
     args.put("url", url);
+    args.put("useCustomTabs", useCustomTabs);
     args.put("useWebView", useWebView);
     args.put("enableJavaScript", enableJavaScript);
     args.put("enableDomStorage", enableDomStorage);
     args.put("headers", new HashMap<>());
     // Mock the launch method on the urlLauncher class
     when(urlLauncher.launch(
-            eq(url), any(Bundle.class), eq(useWebView), eq(enableJavaScript), eq(enableDomStorage)))
+            eq(url),
+            any(Bundle.class),
+            eq(useCustomTabs),
+            eq(useWebView),
+            eq(enableJavaScript),
+            eq(enableDomStorage)))
         .thenReturn(UrlLauncher.LaunchStatus.ACTIVITY_NOT_FOUND);
     // Act by calling the "launch" method on the method channel
     methodCallHandler = new MethodCallHandlerImpl(urlLauncher);
@@ -174,19 +188,26 @@ public class MethodCallHandlerImplTest {
     Result result = mock(Result.class);
     // Setup expected values
     String url = "foo";
+    boolean useCustomTabs = false;
     boolean useWebView = false;
     boolean enableJavaScript = false;
     boolean enableDomStorage = false;
     // Setup arguments map send on the method channel
     Map<String, Object> args = new HashMap<>();
     args.put("url", url);
+    args.put("useCustomTabs", useCustomTabs);
     args.put("useWebView", useWebView);
     args.put("enableJavaScript", enableJavaScript);
     args.put("enableDomStorage", enableDomStorage);
     args.put("headers", new HashMap<>());
     // Mock the launch method on the urlLauncher class
     when(urlLauncher.launch(
-            eq(url), any(Bundle.class), eq(useWebView), eq(enableJavaScript), eq(enableDomStorage)))
+            eq(url),
+            any(Bundle.class),
+            eq(useCustomTabs),
+            eq(useWebView),
+            eq(enableJavaScript),
+            eq(enableDomStorage)))
         .thenReturn(UrlLauncher.LaunchStatus.OK);
     // Act by calling the "launch" method on the method channel
     methodCallHandler = new MethodCallHandlerImpl(urlLauncher);

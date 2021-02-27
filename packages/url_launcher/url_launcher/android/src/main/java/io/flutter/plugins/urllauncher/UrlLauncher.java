@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Browser;
 import androidx.annotation.Nullable;
+import androidx.browser.customtabs.CustomTabsIntent;
 
 /** Launches components for URLs. */
 class UrlLauncher {
@@ -45,6 +46,7 @@ class UrlLauncher {
    * Attempts to launch the given {@code url}.
    *
    * @param headersBundle forwarded to the intent as {@code Browser.EXTRA_HEADERS}.
+   * @param useCustomTabs when true, the URL is launched with Custom Tabs
    * @param useWebView when true, the URL is launched inside of {@link WebViewActivity}.
    * @param enableJavaScript Only used if {@param useWebView} is true. Enables JS in the WebView.
    * @param enableDomStorage Only used if {@param useWebView} is true. Enables DOM storage in the
@@ -55,6 +57,7 @@ class UrlLauncher {
   LaunchStatus launch(
       String url,
       Bundle headersBundle,
+      boolean useCustomTabs,
       boolean useWebView,
       boolean enableJavaScript,
       boolean enableDomStorage) {
@@ -62,22 +65,29 @@ class UrlLauncher {
       return LaunchStatus.NO_ACTIVITY;
     }
 
-    Intent launchIntent;
-    if (useWebView) {
-      launchIntent =
-          WebViewActivity.createIntent(
-              activity, url, enableJavaScript, enableDomStorage, headersBundle);
+    if (useCustomTabs) {
+      CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+      CustomTabsIntent launchIntent = builder.build();
+      launchIntent.launchUrl(activity, Uri.parse(url));
     } else {
-      launchIntent =
-          new Intent(Intent.ACTION_VIEW)
-              .setData(Uri.parse(url))
-              .putExtra(Browser.EXTRA_HEADERS, headersBundle);
-    }
 
-    try {
-      activity.startActivity(launchIntent);
-    } catch (ActivityNotFoundException e) {
-      return LaunchStatus.ACTIVITY_NOT_FOUND;
+      Intent launchIntent;
+      if (useWebView) {
+        launchIntent =
+            WebViewActivity.createIntent(
+                activity, url, enableJavaScript, enableDomStorage, headersBundle);
+      } else {
+        launchIntent =
+            new Intent(Intent.ACTION_VIEW)
+                .setData(Uri.parse(url))
+                .putExtra(Browser.EXTRA_HEADERS, headersBundle);
+      }
+
+      try {
+        activity.startActivity(launchIntent);
+      } catch (ActivityNotFoundException e) {
+        return LaunchStatus.ACTIVITY_NOT_FOUND;
+      }
     }
 
     return LaunchStatus.OK;
