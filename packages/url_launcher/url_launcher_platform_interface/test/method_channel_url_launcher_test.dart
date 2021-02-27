@@ -76,6 +76,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -88,6 +89,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': false,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -102,6 +104,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -114,6 +117,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': false,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -128,6 +132,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -140,6 +145,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': false,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -154,6 +160,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: false,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -166,6 +173,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': false,
+            'useCustomTabs': false,
             'useWebView': false,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -176,10 +184,39 @@ void main() {
       );
     });
 
+    test('launch force CustomTabs', () async {
+      await launcher.launch(
+        'http://example.com/',
+        useSafariVC: true,
+        useCustomTabs: true,
+        useWebView: false,
+        enableJavaScript: false,
+        enableDomStorage: false,
+        universalLinksOnly: false,
+        headers: const <String, String>{},
+      );
+      expect(
+        log,
+        <Matcher>[
+          isMethodCall('launch', arguments: <String, Object>{
+            'url': 'http://example.com/',
+            'useSafariVC': true,
+            'useCustomTabs': true,
+            'useWebView': false,
+            'enableJavaScript': false,
+            'enableDomStorage': false,
+            'universalLinksOnly': false,
+            'headers': <String, String>{},
+          })
+        ],
+      );
+    });
+
     test('launch force WebView', () async {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: true,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -192,6 +229,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': true,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -206,6 +244,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: true,
         enableJavaScript: true,
         enableDomStorage: false,
@@ -218,6 +257,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': true,
             'enableJavaScript': true,
             'enableDomStorage': false,
@@ -232,6 +272,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: true,
         enableJavaScript: false,
         enableDomStorage: true,
@@ -244,6 +285,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': true,
+            'useCustomTabs': false,
             'useWebView': true,
             'enableJavaScript': false,
             'enableDomStorage': true,
@@ -258,6 +300,7 @@ void main() {
       await launcher.launch(
         'http://example.com/',
         useSafariVC: false,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,
@@ -270,6 +313,7 @@ void main() {
           isMethodCall('launch', arguments: <String, Object>{
             'url': 'http://example.com/',
             'useSafariVC': false,
+            'useCustomTabs': false,
             'useWebView': false,
             'enableJavaScript': false,
             'enableDomStorage': false,
@@ -284,6 +328,7 @@ void main() {
       final launched = await launcher.launch(
         'http://example.com/',
         useSafariVC: true,
+        useCustomTabs: false,
         useWebView: false,
         enableJavaScript: false,
         enableDomStorage: false,

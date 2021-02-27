@@ -33,6 +33,7 @@ class MethodChannelUrlLauncher extends UrlLauncherPlatform {
   Future<bool> launch(
     String url, {
     required bool useSafariVC,
+    required bool useCustomTabs,
     required bool useWebView,
     required bool enableJavaScript,
     required bool enableDomStorage,
@@ -45,6 +46,7 @@ class MethodChannelUrlLauncher extends UrlLauncherPlatform {
       <String, Object>{
         'url': url,
         'useSafariVC': useSafariVC,
+        'useCustomTabs': useCustomTabs,
         'useWebView': useWebView,
         'enableJavaScript': enableJavaScript,
         'enableDomStorage': enableDomStorage,

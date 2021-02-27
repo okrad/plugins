@@ -53,6 +53,7 @@ abstract class UrlLauncherPlatform extends PlatformInterface {
   Future<bool> launch(
     String url, {
     required bool useSafariVC,
+    required bool useCustomTabs,
     required bool useWebView,
     required bool enableJavaScript,
     required bool enableDomStorage,
