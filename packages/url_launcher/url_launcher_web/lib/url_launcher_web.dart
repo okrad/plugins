@@ -75,6 +75,7 @@ class UrlLauncherPlugin extends UrlLauncherPlatform {
   Future<bool> launch(
     String url, {
     bool useSafariVC = false,
+    bool useCustomTabs = false,
     bool useWebView = false,
     bool enableJavaScript = false,
     bool enableDomStorage = false,
